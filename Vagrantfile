@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "cameronmalek/arch1403"
   config.vm.provision :shell, :path => "bootstrap.sh"
 
-  for port in 49000..49900
+  for port in 3000..3333
     config.vm.network :forwarded_port, host: port, guest: port
   end
 
