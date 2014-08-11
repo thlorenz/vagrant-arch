@@ -18,7 +18,7 @@ vagrant ssh
 
 ## Note
 
-It assumes you have a nice machine and therefore allocates **4 CPUs** and **4GiB Memory** to the box in order to make it
+It assumes you have a nice machine and therefore allocates **1/4 memory** and **all your CPUs** to the box in order to make it
 run efficiently.
 
 If that is a problem for you pleas edit the `Vagrantfile` and adapt the `config.vm.provider :virtualbox` section.
