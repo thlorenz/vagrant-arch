@@ -19,12 +19,13 @@ pacman -Sy --noconfirm
 # Installs
 # pacman -S --noconfirm base-devel
 
-pacman -S --noconfirm iotop ncdu gnu-netcat the_silver_searcher
+pacman -S --noconfirm iotop ncdu gnu-netcat the_silver_searcher htop
 pacman -S --noconfirm clang clang-analyzer
 pacman -S --noconfirm valgrind
 pacman -S --noconfirm ctags
 pacman -S --noconfirm tmux
 pacman -S --noconfirm git
+
 
 pacman -S --noconfirm ccache
 
