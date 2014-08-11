@@ -32,4 +32,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     file.source      = './install-lldb.sh'
     file.destination = '/home/vagrant/install-lldb.sh'
   end 
+
+  config.vm.provision :file do |file|
+    file.source      = './install-perf.sh'
+    file.destination = '/home/vagrant/install-perf.sh'
+  end 
 end
