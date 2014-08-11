@@ -17,7 +17,7 @@ echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 pacman -Sy --noconfirm
 
 # Installs
-# pacman -S --noconfirm base-devel
+pacman -S --noconfirm base-devel libutil-linux 
 
 pacman -S --noconfirm iotop ncdu gnu-netcat the_silver_searcher htop
 pacman -S --noconfirm clang clang-analyzer
