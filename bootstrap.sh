@@ -48,13 +48,16 @@ ln -s /usr/bin/python2 /usr/bin/python
 pacman -S --noconfirm gvim
 
 # my dotfile setup
-git clone https://github.com/thlorenz/dotfiles.git ~/dotfiles
-chown -R vagrant:vagrant ~/dotfiles
+if [ ! -d ~/dotfiles ]
+then
+  git clone https://github.com/thlorenz/dotfiles.git ~/dotfiles
+  chown -R vagrant:vagrant ~/dotfiles
 
-rm -f ~/.bashrc ~/.profile
+  rm -f ~/.bashrc ~/.profile
 
-~/dotfiles/scripts/create-links.sh
-~/dotfiles/scripts/copy-fonts.sh
+  ~/dotfiles/scripts/create-links.sh
+  ~/dotfiles/scripts/copy-fonts.sh
 
-(cd ~/dotfiles && git submodule update --init)
-(cd ~/dotfiles && git submodule foreach git pull origin master)
+  (cd ~/dotfiles && git submodule update --init)
+  (cd ~/dotfiles && git submodule foreach git pull origin master)
+fi

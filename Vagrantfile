@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "cameronmalek/arch1403"
-# config.vm.provision :shell, :path => "bootstrap.sh"
+  config.vm.provision :shell, :path => "bootstrap.sh"
 
   for port in 5000..5200
     config.vm.network :forwarded_port, host: port, guest: port
