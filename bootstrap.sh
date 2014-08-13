@@ -30,6 +30,10 @@ pacman -S --noconfirm libunistring
 
 pacman -S --noconfirm nodejs
 
+# need this to sync mounted folders with nfs which is much faster
+# http://www.stefanwrobel.com/how-to-make-vagrant-performance-not-suck
+pacman -S --noconfirm nfs-utils
+
 mkdir -p ~/npm-global
 npm config set prefix '~/npm-global'
 npm install -g jshint

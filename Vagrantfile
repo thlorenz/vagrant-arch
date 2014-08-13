@@ -38,4 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     file.source      = './install-perf.sh'
     file.destination = '/home/vagrant/install-perf.sh'
   end 
+
+  config.vm.network :private_network, ip: '192.168.50.50'
+  config.vm.synced_folder "~/dotfiles", "/home/vagrant/dotfiles", nfs: true
+  config.vm.synced_folder "~/dev", "/home/vagrant/dev_", nfs: true
 end
