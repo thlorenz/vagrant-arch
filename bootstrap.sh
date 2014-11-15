@@ -25,9 +25,8 @@ pacman -S --noconfirm valgrind
 pacman -S --noconfirm ctags
 pacman -S --noconfirm tmux
 pacman -S --noconfirm git
-
-
-pacman -S --noconfirm ccache
+pacman -S --noconfirm nasm
+pacman -S --noconfirm libunistring
 
 pacman -S --noconfirm nodejs
 
