@@ -34,12 +34,10 @@ pacman -Sy --noconfirm clang clang-analyzer
 pacman -S --noconfirm cmake ninja 
 
 # more dependencies
-pacman -S --noconfirm swig python2
+pacman -S --noconfirm swig python2 svn
 
 # ensure we use python2 since lldb depends on StringIO to build
 (cd /usr/bin && rm -rf python && ln -s python2 python)
-
-cmake .. -G Ninja -Wno-dev
 
 mkdir -p dev/c && cd dev/c
 svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
@@ -50,6 +48,8 @@ mkdir ../build && cd ../build
 
 echo "If you see this error: 'Target: x86_64-unknown-linux-gnu' run the following command from the current directory"
 echo "/usr/bin/clang++   -DGTEST_HAS_RTTI=0 -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fPIC -fvisibility-inlines-hidden -Wall -W -Wno-unused-parameter -Wwrite-strings -Wmissing-field-initializers -pedantic -Wno-long-long -Wcovered-switch-default -Wnon-virtual-dtor -std=c++11 -fcolor-diagnostics -fdata-sections -Ilib/Target/ARM -I../lib/Target/ARM -Iinclude -I../include    -fno-exceptions -fno-rtti -MMD -MT lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMFastISel.cpp.o -MF lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMFastISel.cpp.o.d -o lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMFastISel.cpp.o -c ../lib/Target/ARM/ARMFastISel.cpp"
+
+cmake .. -G Ninja -Wno-dev
 
 ninja install
 
