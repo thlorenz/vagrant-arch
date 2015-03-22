@@ -1,0 +1,10 @@
+---
+# Variables listed here are applicable to all host groups.
+
+ansible_python_interpreter: /usr/bin/python2
+
+PERF     : "{{ ansible_env.PERF }}"
+LLDB     : "{{ ansible_env.LLDB }}"
+DEVEL    : "{{ ansible_env.DEVEL }}"
+DOTFILES : "{{ ansible_env.DOTFILES }}"
+VIM      : "{{ ansible_env.VIM }}"

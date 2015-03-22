@@ -1,0 +1,31 @@
+---
+
+- name: Add C/C++ dependencies
+  tags: devel.c
+  pacman: name="{{ item }}" state=present
+  with_items: 
+    - clang 
+    - clang-analyzer 
+    - valgrind 
+    - libunistring
+    - cmake
+    - ninja
+  when: DEVEL != None
+
+- name: Add assembly dependencies
+  tags: devel.assembly
+  pacman: name="{{ item }}" state=present
+  with_items: nasm
+  when: DEVEL != None
+
+- name: Add lldb
+  tags: devel.lldb
+  pacman: name="{{ item }}" state=present
+  with_items: lldb
+  when: LLDB != None
+  
+- name: Add perf
+  tags: devel.perf
+  pacman: name="{{ item }}" state=present
+  with_items: perf
+  when: PERF != None

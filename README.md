@@ -4,16 +4,60 @@ Sets up arch inside a VirtualBox and applies my dotfiles, so if you want the exa
 
 - install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - install [vagrant](http://www.vagrantup.com/)
+- install [ansible](http://www.ansible.com/home) via `brew install ansible`
 
 ```sh
 git clone https://github.com/thlorenz/vagrant-arch && cd vagrant-arch
-vagrant up
+./vagrant-up-all.sh
 ```
 
 Things should set themselves up and when it's done you can:
 
 ```sh
 vagrant ssh
+```
+
+## Ansible
+
+### direct ansible access
+
+Setup access to the VM by first removing existing entries for the IP of the VM and then authorize our public key. The
+password is `vagrant`.
+
+```sh
+ssh-keygen -f ~/.ssh/known_hosts -R 192.168.50.51
+ssh-copy-id -i ~/.ssh/id_rsa.pub vagrant@192.168.50.51
+```
+
+This command should succeed and thus show that all `ansible` commands can be run manually against the VM.
+
+```sh
+ansible arch -m ping -i ansible/hosts -u vagrant
+```
+
+#### ansible config
+
+In order to not have to provide user and inventory file an `ansible.cfg` has been included which ansible will read
+automatically.
+
+Therefore you can leave off the inventory and user parameters.
+
+```sh
+ansible arch -m ping
+# or
+ansible arch -a 'ls -la'
+```
+
+#### running playbook
+
+```sh
+ansible-playbook ansible/arch.yml
+```
+
+or run the playbook with all features activated
+
+```
+./ansible-all.sh
 ```
 
 ## Note

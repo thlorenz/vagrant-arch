@@ -1,0 +1,14 @@
+---
+- hosts        : arch
+  gather_facts : True
+  remote_user  : vagrant
+  sudo         : yes
+
+  roles:
+    - dependencies 
+    - dotfiles
+    - devel
+    - vim
+
+# -*- mode: ansible -*-
+# vi: set ft=ansible :

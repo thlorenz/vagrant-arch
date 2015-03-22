@@ -1,0 +1,11 @@
+---
+
+- name: Add vim 
+  tags: vim.vim
+  pacman: name="{{ item }}" state=present
+  with_items: 
+    - vim 
+  when: VIM != None
+
+# YouCompleteMe not properly building, get from: https://wiki.archlinux.org/index.php/YouCompleteMe instead
+# an AUR package exists: https://aur.archlinux.org/packages/vim-youcompleteme-git/

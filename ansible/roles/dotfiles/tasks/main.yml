@@ -1,0 +1,31 @@
+---
+
+- name: Clone dotfiles
+  tags: dotfiles.clone
+  git: repo=https://github.com/thlorenz/dotfiles.git
+       depth=1
+       dest=/home/vagrant/dotfiles
+  when: DOTFILES != None
+
+- name: Own dotfiles
+  tags: dotfiles.own
+  file: dest=dotfiles state=directory owner=vagrant group=vagrant recurse=true
+  when: DOTFILES != None
+
+- name: Link rc files
+  tags: dotfiles.link
+  file: src=./dotfiles/"{{ item.src }}" state=link dest=/home/vagrant/"{{ item.dst }}" force=true owner=vagrant group=vagrant
+  with_items:
+    - { src: bashrc             , dst: .bashrc }
+    - { src: bashprofile        , dst: .profile }
+    - { src: inputrc            , dst: .inputrc }
+    - { src: vimrc              , dst: .vimrc }
+    - { src: gitconfig          , dst: .gitconfig }
+    - { src: gitignore          , dst: .gitignore }
+    - { src: tigrc              , dst: .tigrc }
+    - { src: cardinalrc         , dst: .cardinalrc }
+    - { src: agignore           , dst: .agignore }
+    - { src: tmux/tmux.conf     , dst: .tmux.conf }
+    - { src: lldb/lldbinit-lldb , dst: .lldbinit-lldb }
+    - { src: tern-config        , dst: .tern-config }
+  when: DOTFILES != None

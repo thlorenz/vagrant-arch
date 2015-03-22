@@ -1,17 +1,32 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
+
+IP = '192.168.50.51'
+
+ANSIBLE_TAGS    = ENV['ANSIBLE_TAGS']
+ANSIBLE_VERBOSE = ENV['ANSIBLE_VERBOSE'].nil? ? 'vvvv' : ENV['ANSIBLE_VERBOSE']
+
+ANSIBLE = ENV['ANSIBLE']
+BASH    = ENV['BASH']
+FWPORTS = ENV['FWPORTS']
+
+LLDB     = ENV['LLDB']
+PERF     = ENV['PERF']
+DEVEL    = ENV['DEVEL']
+DOTFILES = ENV['DOTFILES']
+VIM      = ENV['VIM']
+
+if ANSIBLE and BASH
+  throw "Use either ANSIBLE or BASH but not both together"
+end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "terrywang/archlinux-x86_64"
   config.vm.box_url = "http://cloud.terry.im/vagrant/archlinux-x86_64.box"
-  config.vm.provision :shell, :path => "bootstrap.sh"
-
-  for port in 5000..5200
-    config.vm.network :forwarded_port, host: port, guest: port
-  end
 
   host = RbConfig::CONFIG['host_os']
 
@@ -29,13 +44,46 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     mem = 1024
   end
 
-  config.vm.provision :file do |file|
-    file.source      = './install-lldb.sh'
-    file.destination = '/home/vagrant/install-lldb.sh'
-  end 
+  config.vm.network :private_network, ip: IP
 
-  config.vm.provision :file do |file|
-    file.source      = './install-perf.sh'
-    file.destination = '/home/vagrant/install-perf.sh'
-  end 
+  if FWPORTS
+    for port in 5000..5200
+      config.vm.network :forwarded_port, host: port, guest: port
+    end
+  end
+
+  if ANSIBLE
+    config.vm.provision "ansible" do |ansible|
+      ansible.extra_vars = {
+        LLDB: LLDB,
+        PERF: PERF,
+        DEVEL: DEVEL,
+        DOTFILES: DOTFILES,
+        VIM: VIM
+      }
+      ansible.playbook = "ansible/arch.yml"
+      ansible.inventory_path = "ansible/hosts"
+      ansible.sudo = true
+      ansible.verbose= ANSIBLE_VERBOSE
+      ansible.limit = 'all'
+      unless ANSIBLE_TAGS.nil?
+        ansible.tags = ANSIBLE_TAGS
+      end
+    end
+  elsif BASH
+    config.vm.provision :shell, :path => "scripts/bootstrap.sh"
+    if LLDB
+      config.vm.provision :file do |file|
+        file.source      = './scripts/install-lldb.sh'
+        file.destination = '/home/vagrant/install-lldb.sh'
+      end
+    end
+
+    if PERF
+      config.vm.provision :file do |file|
+        file.source      = './scripts/install-perf.sh'
+        file.destination = '/home/vagrant/install-perf.sh'
+      end
+    end
+  end
 end
