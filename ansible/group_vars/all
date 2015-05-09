@@ -5,6 +5,7 @@ ansible_python_interpreter: /usr/bin/python2
 
 PERF     : "{{ ansible_env.PERF }}"
 LLDB     : "{{ ansible_env.LLDB }}"
+CLAN     : "{{ ansible_env.CLANG }}"
 DEVEL    : "{{ ansible_env.DEVEL }}"
 DOTFILES : "{{ ansible_env.DOTFILES }}"
 VIM      : "{{ ansible_env.VIM }}"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 ANSIBLE=1  \
+CLANG=1    \
 LLDB=1     \
 PERF=1     \
 DEVEL=1    \

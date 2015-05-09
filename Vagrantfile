@@ -14,7 +14,10 @@ ANSIBLE = ENV['ANSIBLE']
 BASH    = ENV['BASH']
 FWPORTS = ENV['FWPORTS']
 
+# optional dependencies, these vars are picked
+# up inside the ansible roles (see ansible/group_vars)
 LLDB     = ENV['LLDB']
+CLANG    = ENV['CLANG']
 PERF     = ENV['PERF']
 DEVEL    = ENV['DEVEL']
 DOTFILES = ENV['DOTFILES']

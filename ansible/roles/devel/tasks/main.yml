@@ -4,8 +4,6 @@
   tags: devel.c
   pacman: name="{{ item }}" state=present
   with_items: 
-    - clang 
-    - clang-analyzer 
     - valgrind 
     - libunistring
     - cmake
@@ -18,12 +16,21 @@
   with_items: nasm
   when: DEVEL != None
 
+# optional extras
 - name: Add lldb
   tags: devel.lldb
   pacman: name="{{ item }}" state=present
   with_items: lldb
   when: LLDB != None
-  
+
+- name: Add clang
+  tags: devel.clang
+  pacman: name="{{ item }}" state=present
+  with_items: clang
+    - clang 
+    - clang-analyzer 
+  when: CLANG != None
+
 - name: Add perf
   tags: devel.perf
   pacman: name="{{ item }}" state=present
