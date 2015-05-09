@@ -7,4 +7,5 @@ PERF=1     \
 DEVEL=1    \
 DOTFILES=1 \
 VIM=1      \
+IOJS=1     \
   ansible-playbook ansible/arch.yml

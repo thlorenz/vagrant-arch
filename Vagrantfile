@@ -22,6 +22,7 @@ PERF     = ENV['PERF']
 DEVEL    = ENV['DEVEL']
 DOTFILES = ENV['DOTFILES']
 VIM      = ENV['VIM']
+IOJS     = ENV['IOJS']
 
 if ANSIBLE and BASH
   throw "Use either ANSIBLE or BASH but not both together"

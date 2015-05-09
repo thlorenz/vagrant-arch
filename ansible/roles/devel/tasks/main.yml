@@ -36,3 +36,9 @@
   pacman: name="{{ item }}" state=present
   with_items: perf
   when: PERF != None
+
+- name: Add iojs
+  tags: devel.iojs
+  yaourt: name="{{ item }}" state=present
+  with_items: iojs-bin
+  when: iojs != None
