@@ -17,12 +17,6 @@
   when: DEVEL != None
 
 # optional extras
-- name: Add lldb
-  tags: devel.lldb
-  pacman: name="{{ item }}" state=present
-  with_items: lldb
-  when: LLDB != None
-
 - name: Add clang
   tags: devel.clang
   pacman: name="{{ item }}" state=present
@@ -31,14 +25,14 @@
     - clang-analyzer 
   when: CLANG != None
 
+- name: Add lldb
+  tags: devel.lldb
+  pacman: name="{{ item }}" state=present
+  with_items: lldb
+  when: LLDB != None
+
 - name: Add perf
   tags: devel.perf
   pacman: name="{{ item }}" state=present
   with_items: perf
   when: PERF != None
-
-- name: Add iojs
-  tags: devel.iojs
-  yaourt: name="{{ item }}" state=present
-  with_items: iojs-bin
-  when: iojs != None

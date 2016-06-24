@@ -14,7 +14,7 @@
 
 - name: Link rc files
   tags: dotfiles.link
-  file: src=./dotfiles/"{{ item.src }}" state=link dest=/home/vagrant/"{{ item.dst }}" force=true owner=vagrant group=vagrant
+  file: src=./dotfiles/{{ item.src }} state=link dest=/home/vagrant/{{ item.dst }} force=true owner=vagrant group=vagrant
   with_items:
     - { src: bashrc             , dst: .bashrc }
     - { src: bashprofile        , dst: .profile }

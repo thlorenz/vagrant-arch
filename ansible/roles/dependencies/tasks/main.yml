@@ -1,24 +1,42 @@
 ---
 
+# Install package-query, yaourt and upgrade pacmaen
+# base-devel installation failed if we didn't first install at least package-query
+- name: Install package query
+  tags: dependencies.package-query
+  shell: yaourt -Sy --noconfirm package-query
+
+- name: Update pacman
+  tags: dependencies.pacman-upgrade
+  shell: yaourt -S --noconfirm pacman
+
 - name: Update pacman cache
   tags: dependencies.update
   pacman: update_cache=yes
 
-- name: Add core dependencies
-  tags: dependencies.core
-  pacman: name="{{ item }}" state=present
-  with_items: 
-    - base-devel 
+- name: Add core dependencies base devel
+  tags: dependencies.core.base-devel
+  pacman: name="{{ item }}" state=latest
+  ignore_errors: true
+  with_items:
+    - base-devel
+
+- name: Add core dependencies libutil linux
+  tags: dependencies.core.libutil-linux
+  pacman: name="{{ item }}" state=latest
+  # when already present an error is thrown, i.e. it doesn't detect it as present
+  ignore_errors: true
+  with_items:
     - libutil-linux
 
 - name: Add core utils
   tags: dependencies.utils
-  pacman: name="{{ item }}" state=present
-  with_items: 
-    - git 
-    - tmux 
-    - iotop 
-    - ncdu 
-    - gnu-netcat 
-    # todo:- the_silver_searcher 
+  pacman: name="{{ item }}" state=latest
+  with_items:
+    - git
+    - tmux
+    - iotop
+    - ncdu
+    - gnu-netcat
+    # todo:- the_silver_searcher
     - htop

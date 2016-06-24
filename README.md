@@ -17,6 +17,34 @@ Things should set themselves up and when it's done you can:
 vagrant ssh
 ```
 
+# Compatability
+
+I needed to change a bunch of things when upgrading either of the above tools needed, therefore I'm listing the versions
+of each with which this worked the last time.
+
+```
+➝  vagrant --version
+Vagrant 1.8.4
+
+➝  VBoxHeadless --version
+Oracle VM VirtualBox Headless Interface 5.0.22
+(C) 2008-2016 Oracle Corporation
+All rights reserved.
+
+5.0.22r108108
+
+➝  ansible --version
+ansible 2.0.2.0
+  config file = /Volumes/d/dev/do/vagrant-arch/ansible.cfg
+    configured module search path = Default w/o overrides
+```
+
+# Problems
+
+In some cases the `base-devel` package fails to install, not sure how to fix it (could be because of the prompt it gives
+you or due to some `mount + umount` files present that it can't remove). I ignore this error but if you see red in the
+output make sure to `pacman -S base-devel` the first time you log into the machine if you want that package. 
+
 ## Ansible
 
 ### direct ansible access

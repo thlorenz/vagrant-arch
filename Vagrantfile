@@ -22,7 +22,6 @@ PERF     = ENV['PERF']
 DEVEL    = ENV['DEVEL']
 DOTFILES = ENV['DOTFILES']
 VIM      = ENV['VIM']
-IOJS     = ENV['IOJS']
 
 if ANSIBLE and BASH
   throw "Use either ANSIBLE or BASH but not both together"
@@ -64,7 +63,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         PERF: PERF,
         DEVEL: DEVEL,
         DOTFILES: DOTFILES,
-        VIM: VIM
+        VIM: VIM,
+        CLANG: CLANG
       }
       ansible.playbook = "ansible/arch.yml"
       ansible.inventory_path = "ansible/hosts"

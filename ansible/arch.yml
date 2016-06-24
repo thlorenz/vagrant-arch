@@ -1,8 +1,9 @@
 ---
-- hosts        : arch
-  gather_facts : True
-  remote_user  : vagrant
-  sudo         : yes
+- hosts         : arch
+  gather_facts  : True
+  remote_user   : vagrant
+  become        : yes
+  become_method : sudo
 
   roles:
     - dependencies 
